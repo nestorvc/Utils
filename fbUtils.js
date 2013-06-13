@@ -2,7 +2,6 @@
     Variables
    =================== */
 
-var DEBUG = false;
 var FBAPP_ID = YOUR_APPID;
 var FB_PERMISSIONS = "YOUR_PERMISSIONS";
 
@@ -13,7 +12,7 @@ var FB_PERMISSIONS = "YOUR_PERMISSIONS";
 jQuery(window).load(function(){
 
     setupFacebook();
-    if(DEBUG) console.log("Load OK!"); //DEBUG
+    console.log("Load OK!"); //DEBUG
 });
 
 /* ===================
@@ -56,22 +55,39 @@ function startFacebook() {
 
     FB.Event.subscribe('auth.authResponseChange', function(response) {
         if (response.status === 'connected') { 
-            if(DEBUG) console.log('FB Auth Ok!'); //DEBUG
+            console.log('FB Auth Ok!'); //DEBUG
             //The user is connected to Facebook and with a valid auth
 
             FB.api('/me', function(response) {
                 // Your code here to get info of the current valid connected user
             });
         } else if (response.status === 'not_authorized') {
-            if(DEBUG) console.log("FB Not Auth!", response); //DEBUG 
+            console.log("FB Not Auth!", response); //DEBUG 
             //The user has lost auth, send him to auto-connect on your custom fbLogin()
         } else {
-            if(DEBUG) console.log("FB Miss!", response); //DEBUG 
+            console.log("FB Miss!", response); //DEBUG 
             //The user lost auth and/or not even is connected to Facebook right now
         }        
       });    
 
-    if(DEBUG) console.log("FB Stuff Done!") //DEBUG 
+    console.log("FB Stuff Done!") //DEBUG 
+}
+
+// Decodes the Facebook signed_request
+// The signed_request is a param sent by POST from FB with useful info of the current user
+// This is frequently used in Page Tab to identify if user has already liked the page or not
+// The good thing is that with signed_request you can know this data even if your user has not made a FB Connect yet
+// For more info on signed_request check FB Doc: https://developers.facebook.com/docs/facebook-login/using-login-with-games/
+
+function facebookSignedReq(signed_request) {
+    var encoded_data = signed_request.split('.',2);
+
+    // decode the data
+    var sig = encoded_data[0];
+    var json = base64.decode(encoded_data[1]); //You can find the encode64 on https://github.com/nestorvc/Utils/blob/master/base64.js
+    var data = JSON.parse(json);
+
+    return data; //data.page.liked is the param that let you know if current FB user has liked the current fanpage of the current page tab
 }
 
 
@@ -80,9 +96,9 @@ function startFacebook() {
 function fbLogin() {
     FB.login(function(response) {
         if (response.authResponse) {
-            if(DEBUG) console.log("Successful FB Login"); //DEBUG
+            console.log("Successful FB Login"); //DEBUG
         } else {
-            if(DEBUG) console.log('User cancelled login or did not fully authorize.');
+            console.log('User cancelled login or did not fully authorize.');
         }
     }, {scope: FB_PERMISSIONS});
 }
@@ -93,23 +109,50 @@ function fbLogout() {
     FB.logout();
 }
 
-//Automatic post to the user Facebook stream
-//You must need previous auth permissions set on the fbLogin, specifically "publish_actions"
+//Automatic post to the user's Facebook stream
+//You must need to add "publish_actions" auth permission to your fbLogin()'s FB_PERMISSIONS var
+//Uses FB.api to auto-post
+//For more info check FB Doc: https://developers.facebook.com/docs/reference/javascript/FB.api/
 
-function postToWall() {
+function automaticPostToWall() {
 
-    var params = {};
-    params['message'] = 'YOUR_MESSAGE';
-    params['name'] = 'YOUR_NAME';
-    params['link'] = 'YOUR_LINK';
-    params['picture'] = 'YOUR_PIC';
-    params['description'] = 'YOUR_DESC';
+    var obj = {};
+    obj['message'] = 'YOUR_MESSAGE';
+    obj['name'] = 'YOUR_NAME';
+    obj['link'] = 'YOUR_LINK';
+    obj['picture'] = 'YOUR_PIC';
+    obj['description'] = 'YOUR_DESC';
 
-    FB.api('/me/feed', 'post', params, function(response) {
+    FB.api('/me/feed', 'post', obj, function(response) {
       if (!response || response.error) {
-        if(DEBUG) console.log("Cannot post on FB Wall:", response.error) //DEBUG 
+        console.log("Cannot post on FB Stream:", response.error) //DEBUG 
       } else {
-        if(DEBUG) console.log("Succesfully auto-post on FB Wall!!!") //DEBUG 
+        console.log("Succesfully auto-post on FB Stream!!!") //DEBUG
+        //Here you can add custom success code like a redirect 
+      }
+    });
+}
+
+//Manual post to the user's Facebook stream using FB JS SDK
+//In most cases, this is the way FB demands you to allow publish to a user's Facebook stream
+//Uses FB.ui to manual-post
+//For more info check FB Doc: https://developers.facebook.com/docs/reference/javascript/FB.ui/
+
+function manualPostToWall() {
+    var obj = {};
+    obj['method'] = 'feed';
+    obj['message'] = 'YOUR_MESSAGE';
+    obj['name'] = 'YOUR_NAME';
+    obj['link'] = 'YOUR_LINK';
+    obj['picture'] = 'YOUR_PIC';
+    obj['description'] = 'YOUR_DESC';
+
+    FB.ui(obj, function (response) {
+      if (!response || response.error) {
+        console.log("Cannot post on FB Stream:", response.error) //DEBUG 
+      } else {
+        console.log("Succesfully manual-post on FB Stream!!!") //DEBUG 
+        //Here you can add custom success code like a redirect
       }
     });
 }

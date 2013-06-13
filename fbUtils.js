@@ -103,7 +103,7 @@ function fbLogin() {
     }, {scope: FB_PERMISSIONS});
 }
 
-//Desonnect user from Facebook
+//Disonnect user from Facebook
 
 function fbLogout() {
     FB.logout();

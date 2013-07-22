@@ -1,0 +1,23 @@
+{
+  "name": "node-express-mongo-template",
+  "description": "Node-Express-Mongo Template",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "latest",
+    "mongoose": "latest",
+    "mongoose-user": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "jade": "latest",
+    "async": "latest",
+    "underscore": "latest"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "author": {
+    "name": "Nestor Villalobos",
+    "email": "nestor@interaction.cr"
+  }
+}

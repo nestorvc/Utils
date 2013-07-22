@@ -1,0 +1,13 @@
+extends ../layouts/default
+
+block content
+	p Example Post
+	form(action="/create", method="post")
+		p
+			label Title: 
+			input(type="text", name="title")
+		p
+			label Body: 
+			input(type="text", name="body")
+		p
+			input(type="submit", value="Enviar")

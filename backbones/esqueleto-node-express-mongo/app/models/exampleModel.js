@@ -11,23 +11,54 @@ var Schema = _MONGOOSE.Schema;
 
 // Schema example
 var exampleSchema = new Schema({
-	
-	id: {type : Number, default : 0, trim : true},
-	title: {type : String, default : '', trim : true},
-	body: {type : String, default : '', trim : true},
-/*	user: {type : Schema.ObjectId, ref : 'User'},
-	comments: [{
-		body: { type : String, default : '' },
-		user: { type : Schema.ObjectId, ref : 'User' },
-		createdAt: { type : Date, default : Date.now }
-	}],
-	tags: {type: [], get: getTags, set: setTags},
-	image: {
-		cdnUri: String,
-		files: []
-	},*/
-	createdAt  : {type : Date, default : Date.now}
-	
+
+    id: {
+        type: Number,
+        default: 0,
+        trim: true
+    },
+    title: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    body: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    /*    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
+    comments: [{
+        body: {
+            type: String,
+            default: ''
+        },
+        user: {
+            type: Schema.ObjectId,
+            ref: 'User'
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+    tags: {
+        type: [],
+        get: getTags,
+        set: setTags
+    },
+    image: {
+        cdnUri: String,
+        files: []
+    },*/
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+
 });
 
 /* ===================
@@ -35,8 +66,8 @@ var exampleSchema = new Schema({
    =================== */
 
 // Validation example
-exampleSchema.path('title').validate(function (title) {
-	return title.length > 0
+exampleSchema.path('title').validate(function(title) {
+    return title.length > 0
 }, 'Title must be filled');
 
 /* ===================
@@ -44,16 +75,16 @@ exampleSchema.path('title').validate(function (title) {
    =================== */
 
 // Pre-hook example
-exampleSchema.pre('remove', function (next) {
-	var imager = new Imager(imagerConfig, 'S3');
-	var files = this.image.files;
+exampleSchema.pre('remove', function(next) {
+    var imager = new Imager(imagerConfig, 'S3');
+    var files = this.image.files;
 
-	// if there are files associated with the item, remove from the cloud too
-		imager.remove(files, function (err) {
-		if (err) return next(err);
-	}, 'article');
+    // if there are files associated with the item, remove from the cloud too
+    imager.remove(files, function(err) {
+        if (err) return next(err);
+    }, 'article');
 
-	next();
+    next();
 });
 
 
@@ -63,10 +94,10 @@ exampleSchema.pre('remove', function (next) {
 
 exampleSchema.method({
 
-	//Method example
-	uploadAndSave: function (cb) {
-		this.save(cb);
-	}
+    //Method example
+    uploadAndSave: function(cb) {
+        this.save(cb);
+    }
 
 });
 
@@ -76,13 +107,15 @@ exampleSchema.method({
 
 exampleSchema.static({
 
-	//Static example
-	load: function (id, cb) {
-		this.findOne({ _id : id })
-		  .populate('user', 'name email')
-		  .populate('comments.user')
-		  .exec(cb)
-	},
+    //Static example
+    load: function(id, cb) {
+        this.findOne({
+            _id: id
+        })
+            .populate('user', 'name email')
+            .populate('comments.user')
+            .exec(cb)
+    },
 });
 
 /* ===================

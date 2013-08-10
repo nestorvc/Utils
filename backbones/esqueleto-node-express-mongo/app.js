@@ -31,8 +31,6 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(file) {
 /* PASSPORT */
 require('./config/passport')(passport, config)
 
-/* UNDERSCORE */
-app.locals._ = require('underscore');
 
 /* ===================
     Main
@@ -51,9 +49,14 @@ app.use(app.router);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
 
+/* UNDERSCORE */
+app.locals._ = require('underscore');
+var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log(_DEBUG + "Listening on " + port);
 });
+
+
 
 /* ===================
     Routes

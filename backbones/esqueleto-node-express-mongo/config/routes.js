@@ -28,6 +28,8 @@ module.exports = function(app) {
     app.param('exampleId', exampleController.load);
 
     //Gets
+
+    console.log(_DEBUG + "Hola");
     app.get('/:exampleId', exampleController.show);
     app.get('/success', passport.requiresLogin, exampleController.exampleFunction);
 

@@ -6,12 +6,17 @@ var exampleController = require('../app/controllers/exampleController');
 var passport = require('passport');
 
 /* ===================
-    Extras
+    Middlewares
+   =================== */
+   
+var auth = require('./middlewares/authorization');
+
+/* ===================
+    Utils
    =================== */
 
-/*PASSPORT*/
 var passportExampleOptions = {
-    successRedirect: '/success',
+    successRedirect: '/example',
     failureRedirect: '/login'
 }
 
@@ -21,19 +26,14 @@ var passportExampleOptions = {
 
 module.exports = function(app) {
 
-    // Home
-    app.get('/', exampleController.exampleFunction);
+    app.get('/', exampleController.index);
+    app.get('/example/new', exampleController.new);
+    app.get('/example/:objectId', exampleController.readIt);
+    app.post('/example/create', exampleController.createIt);
+    app.post('/example/update', exampleController.updateIt);
+    app.post('/example/delete', exampleController.deleteIt);
 
-    // Middleware
-    app.param('exampleId', exampleController.load);
-
-    //Gets
-
-    console.log(_DEBUG + "Hola");
-    app.get('/:exampleId', exampleController.show);
-    app.get('/success', passport.requiresLogin, exampleController.exampleFunction);
-
-    //Posts
-    app.post('/create', exampleController.create);
-    app.post('/auth/login', passport.authenticate('local', passportExampleOptions));
+    //Passport only if you create the login process
+    // app.get('/example', auth.requiresLogin, exampleController.exampleFunction);
+    // app.post('/auth/login', passport.authenticate('local', passportExampleOptions));
 }

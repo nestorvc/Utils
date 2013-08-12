@@ -12,11 +12,6 @@ var Schema = _MONGOOSE.Schema;
 // Schema example
 var exampleSchema = new Schema({
 
-    id: {
-        type: Number,
-        default: 0,
-        trim: true
-    },
     title: {
         type: String,
         default: '',
@@ -57,34 +52,12 @@ var exampleSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    modifiedAt: {
+        type: Date,
+        default: Date.now
     }
 
-});
-
-/* ===================
-    Validations
-   =================== */
-
-// Validation example
-exampleSchema.path('title').validate(function(title) {
-    return title.length > 0
-}, 'Title must be filled');
-
-/* ===================
-    Pre-remove hooks
-   =================== */
-
-// Pre-hook example
-exampleSchema.pre('remove', function(next) {
-    var imager = new Imager(imagerConfig, 'S3');
-    var files = this.image.files;
-
-    // if there are files associated with the item, remove from the cloud too
-    imager.remove(files, function(err) {
-        if (err) return next(err);
-    }, 'article');
-
-    next();
 });
 
 
@@ -94,9 +67,10 @@ exampleSchema.pre('remove', function(next) {
 
 exampleSchema.method({
 
-    //Method example
-    uploadAndSave: function(cb) {
-        this.save(cb);
+    createIt: function(callback) {
+        console.log(_DEBUG + "CREATING..."); //DEBUG
+        var self = this;
+        self.save(callback);
     }
 
 });
@@ -107,14 +81,40 @@ exampleSchema.method({
 
 exampleSchema.static({
 
-    //Static example
-    load: function(id, cb) {
+    readIt: function(id, callback) {
+        console.log(_DEBUG + "READING..."); //DEBUG
         this.findOne({
             _id: id
         })
-            .populate('user', 'name email')
-            .populate('comments.user')
-            .exec(cb)
+            .exec(callback)
+    },
+
+    updateIt: function(id, object, callback) {
+        console.log(_DEBUG + "UPDATING..."); //DEBUG
+        this.update({
+                _id: id
+            }, {
+                //Estos params son custom según el modelo que se esté actualizando
+                title: object.title,
+                body: object.body,
+                modifiedAt: Date.now(),
+            },
+            null, callback);
+    },
+
+    deleteIt: function(id, callback) {
+        console.log(_DEBUG + "DELETING..."); //DEBUG
+        this.update({
+                _id: id
+            }, {
+                deletedAt: Date.now()
+            },
+            null, callback);
+    },
+
+    loadAll: function(callback) {
+        console.log(_DEBUG + "LOADING..."); //DEBUG
+        this.find().sort('createdAt').exec(callback)
     },
 });
 

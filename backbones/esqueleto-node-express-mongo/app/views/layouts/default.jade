@@ -2,5 +2,12 @@ doctype 5
 html
   include ../includes/head
   body    
+
+  div.container
+    div.navbar
+      a(class="navbar-brand", href="/") Inicio
+      ul(class="nav navbar-nav")
+        li: a(href="#") Other
+
     block content
     include ../includes/foot

@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block content
+
+  h2: strong: a(href="/")= title
+  table(class="table table-hover")
+    thead
+      tr
+        th ID
+        th Title
+        th Body
+    tbody
+        tr
+          td #{result._id}
+          td #{result.title}
+          td #{result.body}
+
+  form(method="post", action="example/update")
+    fieldset
+      legend Actualizar #{title}
+      input(type="hidden", value="#{result._id}", name="id")
+      div.form-group
+        label Title
+        input(type="text", class="form-control", placeholder="Title", name="title", value="#{result.title}")
+      div.form-group
+        label Body
+        input(type="text", class="form-control", placeholder="Body", name="body", value="#{result.body}")
+
+      button(type="submit", class="btn btn-default") Actualizar

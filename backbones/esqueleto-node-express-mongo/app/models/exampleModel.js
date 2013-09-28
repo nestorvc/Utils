@@ -12,17 +12,17 @@ var Schema = _MONGOOSE.Schema;
 // Schema example
 var exampleSchema = new Schema({
 
-    title: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    body: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    /*    user: {
+  title: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  body: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  /*    user: {
         type: Schema.ObjectId,
         ref: 'User'
     },
@@ -49,14 +49,14 @@ var exampleSchema = new Schema({
         cdnUri: String,
         files: []
     },*/
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    modifiedAt: {
-        type: Date,
-        default: Date.now
-    }
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  modifiedAt: {
+    type: Date,
+    default: Date.now
+  }
 
 });
 
@@ -67,11 +67,11 @@ var exampleSchema = new Schema({
 
 exampleSchema.method({
 
-    createIt: function(callback) {
-        console.log(_DEBUG + "CREATING..."); //DEBUG
-        var self = this;
-        self.save(callback);
-    }
+  createIt: function(callback) {
+    console.log(_DEBUG + "CREATING..."); //DEBUG
+    var self = this;
+    self.save(callback);
+  }
 
 });
 
@@ -81,41 +81,41 @@ exampleSchema.method({
 
 exampleSchema.static({
 
-    readIt: function(id, callback) {
-        console.log(_DEBUG + "READING..."); //DEBUG
-        this.findOne({
-            _id: id
-        })
-            .exec(callback)
-    },
+  readIt: function(id, callback) {
+    console.log(_DEBUG + "READING..."); //DEBUG
+    this.findOne({
+      _id: id
+    })
+      .exec(callback)
+  },
 
-    updateIt: function(id, object, callback) {
-        console.log(_DEBUG + "UPDATING..."); //DEBUG
-        this.update({
-                _id: id
-            }, {
-                //Estos params son custom según el modelo que se esté actualizando
-                title: object.title,
-                body: object.body,
-                modifiedAt: Date.now(),
-            },
-            null, callback);
-    },
+  updateIt: function(id, object, callback) {
+    console.log(_DEBUG + "UPDATING..."); //DEBUG
+    this.update({
+        _id: id
+      }, {
+        //Estos params son custom según el modelo que se esté actualizando
+        title: object.title,
+        body: object.body,
+        modifiedAt: Date.now(),
+      },
+      null, callback);
+  },
 
-    deleteIt: function(id, callback) {
-        console.log(_DEBUG + "DELETING..."); //DEBUG
-        this.update({
-                _id: id
-            }, {
-                deletedAt: Date.now()
-            },
-            null, callback);
-    },
+  deleteIt: function(id, callback) {
+    console.log(_DEBUG + "DELETING..."); //DEBUG
+    this.update({
+        _id: id
+      }, {
+        deletedAt: Date.now()
+      },
+      null, callback);
+  },
 
-    loadAll: function(callback) {
-        console.log(_DEBUG + "LOADING..."); //DEBUG
-        this.find().sort('createdAt').exec(callback)
-    },
+  loadAll: function(callback) {
+    console.log(_DEBUG + "LOADING..."); //DEBUG
+    this.find().sort('createdAt').exec(callback)
+  },
 });
 
 /* ===================

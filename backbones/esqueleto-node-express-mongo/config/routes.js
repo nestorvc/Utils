@@ -8,7 +8,7 @@ var passport = require('passport');
 /* ===================
     Middlewares
    =================== */
-   
+
 var auth = require('./middlewares/authorization');
 
 /* ===================
@@ -16,8 +16,8 @@ var auth = require('./middlewares/authorization');
    =================== */
 
 var passportExampleOptions = {
-    successRedirect: '/example',
-    failureRedirect: '/login'
+  successRedirect: '/example',
+  failureRedirect: '/login'
 }
 
 /* ===================
@@ -26,14 +26,14 @@ var passportExampleOptions = {
 
 module.exports = function(app) {
 
-    app.get('/', exampleController.index);
-    app.get('/example/new', exampleController.new);
-    app.get('/example/:objectId', exampleController.readIt);
-    app.post('/example/create', exampleController.createIt);
-    app.post('/example/update', exampleController.updateIt);
-    app.post('/example/delete', exampleController.deleteIt);
+  app.get('/', exampleController.index);
+  app.get('/example/new', exampleController.new);
+  app.get('/example/:objectId', exampleController.readIt);
+  app.post('/example/create', exampleController.createIt);
+  app.post('/example/update', exampleController.updateIt);
+  app.post('/example/delete', exampleController.deleteIt);
 
-    //Passport only if you create the login process
-    // app.get('/example', auth.requiresLogin, exampleController.exampleFunction);
-    // app.post('/auth/login', passport.authenticate('local', passportExampleOptions));
+  //Passport only if you create the login process
+  // app.get('/example', auth.requiresLogin, exampleController.exampleFunction);
+  // app.post('/auth/login', passport.authenticate('local', passportExampleOptions));
 }

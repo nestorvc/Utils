@@ -8,7 +8,7 @@ _DEBUG = "\033[31m \033[1m";
 
 // Main dependecies
 var port = process.env.PORT || 5000;
-var env = process.env.NODE_ENV || 'development'; /* TODO: Set your current environment, change to "production" when ready */
+var env = process.env.NODE_ENV || 'development';
 if (port != 5000) env = "staging";
 var config = require('./config/config')[env];
 var express = require('express');
@@ -25,7 +25,7 @@ moment.lang('es');
 /* MONGOOSE */
 _MONGOOSE.connect(config.db);
 fs.readdirSync(__dirname + '/app/models').forEach(function(file) {
-    if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
+  if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
 });
 
 /* PASSPORT */
@@ -41,7 +41,7 @@ var app = express();
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({
-    secret: 'yoursecret' /* TODO: Remember to change to your own secret */
+  secret: 'yoursecret' /* TODO: Remember to change to your own secret */
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,16 +51,14 @@ app.set('view engine', 'jade');
 
 /* UNDERSCORE */
 app.locals._ = require('underscore');
-var port = process.env.PORT || 5000;
+
 app.listen(port, function() {
-    console.log(_DEBUG + "Listening on " + port);
+  console.log(_DEBUG + "Listening on " + port);
 });
-
-
 
 /* ===================
     Routes
    =================== */
 
-require('./config/routes')(app) // Bootstrap routes
+require('./config/routes')(app)
 app.use(express.static(__dirname + '/public'));

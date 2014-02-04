@@ -1,37 +1,37 @@
-/* ===================
-    Dependencies
-   =================== */
+ // -----------------------
+ // Dependencies
+ // -----------------------
 
-var LocalStrategy = require('passport-local').Strategy;
-var Ejemplo = _MONGOOSE.model('Ejemplo');
+ var LocalStrategy = require('passport-local').Strategy;
+ var Ejemplo = _MONGOOSE.model('Ejemplo');
 
-module.exports = function(passport, config) {
+ module.exports = function(passport, config) {
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+   passport.serializeUser(function(user, done) {
+     done(null, user.id);
+   });
 
-  passport.deserializeUser(function(id, done) {
+   passport.deserializeUser(function(id, done) {
 
-    Ejemplo.readIt(id, function(err, result) {
-      if (err) {
-        console.log(_DEBUG + "ERROR: ", err); //DEBUG
-        return done(err);
-      } else {
-        done(err, result);
-      }
-    })
-  })
+     Ejemplo.readIt(id, function(err, result) {
+       if (err) {
+         console.log(_DEBUG + "ERROR: ", err); //DEBUG
+         return done(err);
+       } else {
+         done(err, result);
+       }
+     })
+   })
 
-  passport.use(new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'pass'
-    },
-    function(email, pass, done) {
-      console.log(_DEBUG + "LOCAL STRATEGY: ", email); //DEBUG
+   passport.use(new LocalStrategy({
+       usernameField: 'email',
+       passwordField: 'pass'
+     },
+     function(email, pass, done) {
+       console.log(_DEBUG + "LOCAL STRATEGY: ", email); //DEBUG
 
-      // TODO: Se debe crear un método "readItByEmail"
-      /*Ejemplo.readItByEmail(email, function(err, user) {
+       // TODO: Se debe crear un método "readItByEmail"
+       /*Ejemplo.readItByEmail(email, function(err, user) {
         if (err) {
           console.log(_DEBUG + "ERROR: ", err); //DEBUG
           return done(err);
@@ -51,6 +51,6 @@ module.exports = function(passport, config) {
         console.log(_DEBUG + "Usuario autenticado."); //DEBUG
         return done(null, user);
       });*/
-    }
-  ))
-}
+     }
+   ))
+ }

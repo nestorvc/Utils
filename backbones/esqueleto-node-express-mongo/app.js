@@ -1,6 +1,6 @@
-/* ===================
-    Variables
-   =================== */
+// -----------------------
+// Variables
+// -----------------------
 
 // Globals
 _MONGOOSE = require('mongoose');
@@ -20,23 +20,23 @@ var flash = require('connect-flash');
 require('express-namespace');
 moment.lang('es');
 
-/* ===================
-    Utils
-   =================== */
+// -----------------------
+// Utils
+// -----------------------
 
-/* MONGOOSE */
+// Mongoose 
 _MONGOOSE.connect(config.db);
 fs.readdirSync(__dirname + '/app/models').forEach(function(file) {
   if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
 });
 
-/* PASSPORT */
+// Passport 
 require('./config/passport')(passport, config)
 
 
-/* ===================
-    Main
-   =================== */
+// -----------------------
+// Main
+// -----------------------
 
 // Configure the app
 var app = express();
@@ -54,16 +54,16 @@ app.use(app.router);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
 
-/* UNDERSCORE */
+// Underscore 
 app.locals._ = require('underscore');
 
 app.listen(port, function() {
   console.log(_DEBUG + "Listening on " + port);
 });
 
-/* ===================
-    Routes
-   =================== */
+// -----------------------
+// Routes
+// -----------------------
 
 require('./config/routes')(app)
 app.use(express.static(__dirname + '/public'));

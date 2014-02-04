@@ -26,6 +26,11 @@ define(['jquery', 'nitram'], function($, nitram) {
 	// Utils
 	// ----------------------
 
+	/**
+	 * Renders the app
+	 * - res <Object> express response
+	 * returns: <undefined>
+	 */
 
 
 	// ----------------------

@@ -1,13 +1,13 @@
-/* ===================
-    Variables
-   =================== */
+// -----------------------
+// Variables
+// -----------------------
 
 // Main dependecies
 var Schema = _MONGOOSE.Schema;
 
-/* ===================
-    Schema
-   =================== */
+// -----------------------
+// Schema
+// -----------------------
 
 var ejemploSchema = new Schema({
 
@@ -36,9 +36,9 @@ var ejemploSchema = new Schema({
 });
 
 
-/* ===================
-    Methods
-   =================== */
+// -----------------------
+// Methods
+// -----------------------
 
 ejemploSchema.method({
 
@@ -50,9 +50,9 @@ ejemploSchema.method({
 
 });
 
-/* ===================
-    Statics
-   =================== */
+// -----------------------
+// Statics
+// -----------------------
 
 ejemploSchema.static({
 
@@ -107,8 +107,8 @@ ejemploSchema.static({
   },
 });
 
-/* ===================
-    Register
-   =================== */
+// -----------------------
+// Register
+// -----------------------
 
 _MONGOOSE.model('Ejemplo', ejemploSchema);

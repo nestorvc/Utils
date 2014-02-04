@@ -15,7 +15,7 @@
         "async": "latest",
         "underscore": "latest",
         "moment": "latest",
-        "view-helpers": "latest",
+        "view-helpers": "latest"
     },
     "engines": {
         "node": "0.10.x",

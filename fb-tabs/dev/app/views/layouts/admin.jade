@@ -1,0 +1,29 @@
+doctype 5
+html
+  include ../includes/headAdmin
+  body    
+    //- if lt IE 7
+      p.browsehappy Actualmente está utilizando un navegador 
+        strong desactualizado. 
+        | Por favor
+        a(href="http://browsehappy.com/") actualice su navegador 
+        | para mejorar su experiencia.
+    div.navbar.navbar-inverse.navbar-fixed-top
+      div.container
+        div.navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          span.navbar-brand Cotizador Enertiva
+        div.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li: a(href="admin/cotizaciones") Cotizaciones
+            li: a(href="admin/configuracion") Configuración
+          ul.nav.navbar-nav.pull-right
+            li: a(href="admin/logout") Salir
+
+    div.container.padding-top-80 
+      block content
+      
+      include ../includes/footAdmin

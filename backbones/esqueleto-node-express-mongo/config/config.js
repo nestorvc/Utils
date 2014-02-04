@@ -5,26 +5,22 @@
 module.exports = {
   development: {
     root: __dirname,
-    db: 'mongodb://localhost/test',
-    /* TODO: Add your db route */
-    realm: 'http://localhost:5000/',
+    db: 'mongodb://localhost/temp', //TODO: Agregar BD local acá
+    realm: 'http://localhost:5000/'
   },
   test: {
     root: __dirname,
-    db: 'mongodb://localhost/test',
-    /* TODO: Add your db route */
-    realm: 'http://localhost:5000/',
+    db: 'mongodb://localhost/temp', //TODO: Agregar BD local acá
+    realm: 'http://localhost:5000/'
   },
   staging: {
     root: __dirname,
     db: process.env.MONGOLAB_URI,
-    realm: 'http://yourdomain/',
-    /* TODO: Change to your own domain */
+    realm: _DOMAIN
   },
   production: {
     root: __dirname,
     db: process.env.MONGOLAB_URI,
-    realm: 'http://yourdomain/',
-    /* TODO: Change to your own domain */
+    realm: _DOMAIN
   }
 }

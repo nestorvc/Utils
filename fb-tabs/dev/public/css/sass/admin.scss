@@ -1,0 +1,35 @@
+/* ===================
+   Content
+   =================== */
+
+/*
+ * CONTENTS...................You’re reading it!
+ * COMPASS....................Imports, requires, etc.
+ * SECTIONS...................Content from custom sections
+ */
+
+/* ===================
+   Compass
+   =================== */
+
+@import "compass";
+@import "compass/css3";
+@import "compass/utilities";
+
+$azul: #3498db;
+$azul_oscuro: #2980b9;
+$gris: #95a5a6;
+$gris_oscuro: #7f8c8d;
+$blanco: #FFFFFF;
+$negro: #000000;
+
+/* ===================
+   Sections
+   =================== */
+
+
+/* ===================
+   Helpers
+   =================== */
+
+.padding-top-80 { padding-top: 80px; }

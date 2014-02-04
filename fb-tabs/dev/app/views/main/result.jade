@@ -1,0 +1,73 @@
+extends ../layouts/main
+
+block content
+  div#cargando.hidden
+    p Cargando...
+    img(src="img/loader.gif")
+  div#intro.intro-grande
+    //- Estado normal de la cotización
+    div 
+      div#resultado
+        div.circulo.circulo-blanco
+          img(src="img/termosolar.jpg")
+        div.desc
+          h3 Sistema Termosolar
+          h2 $7.200
+          p Conozca el desgloce abajo.
+      div.pie
+        small Si desea realizar otra cotización,
+          strong: a(href="") haga clic aquí.
+
+    //- Viendo detalle de fotos del proyecto
+    //- div
+      div#resultado.colapsado
+        h4 Sistema Termosolar: $7.200 &nbsp;
+          a(href=""): span: i.flecha.fa.fa-chevron-down
+      div#slideshow      
+        div#imagenes
+          div.imagen
+            //- Las imágenes deberían ser de 810x350
+            img(src="img/img_fotovoltaico.jpg")
+        div.navs
+          div.pull-left
+            a(href=""): span: i.fa.fa-chevron-left.pull-right
+          div.pull-right
+            a(href=""): span: i.fa.fa-chevron-right.pull-left
+
+  div.container
+    div#desgloces
+      //- "Generación estimada" no aplicaría para Termosolar
+      div.desgloce
+        img(src="img/ico_generacion.png")
+        h5 Generación estimada
+        p XXXX kWz
+      div.desgloce
+        img(src="img/ico_ahorro.png")
+        h5 Ahorro estimado
+        p 35% mensuales
+      div.desgloce
+        img(src="img/ico_modulos.png")
+        h5 Cantidad de módulos
+        p 4 módulos primarios
+      //- "Área de Techo" no aplicaría para Termosolar
+      div.desgloce
+        img(src="img/ico_area.png")
+        h5 Área de techo
+        p 15m2
+      div.desgloce
+        img(src="img/ico_retorno.png")
+        h5 Retorno de la inversión
+        p 2 años
+  div.well
+    ul.list-inline.centro
+      li
+        span: i.fa.fa-heart
+        | &nbsp; Vida útil de 10 años
+      li
+        span: i.fa.fa-check
+        | &nbsp; Garantía por 9 años
+      li
+        span: i.fa.fa-star
+        | &nbsp; Otros datos
+
+  a.btn.btn-warning.btn-lg.btn-block Contactar asesor

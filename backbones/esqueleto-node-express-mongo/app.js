@@ -5,17 +5,19 @@
 // Globals
 _MONGOOSE = require('mongoose');
 _DEBUG = "\033[31m \033[1m";
+_DOMAIN = "http://domain.com"; //TODO: Cambiar dominio
 
 // Main dependecies
 var port = process.env.PORT || 5000;
 var env = process.env.NODE_ENV || 'development';
-if (port != 5000) env = "staging";
 var config = require('./config/config')[env];
 var express = require('express');
 var passport = require('passport');
 var moment = require('moment');
 var fs = require('fs');
+var flash = require('connect-flash');
 
+require('express-namespace');
 moment.lang('es');
 
 /* ===================
@@ -39,10 +41,13 @@ require('./config/passport')(passport, config)
 // Configure the app
 var app = express();
 app.use(express.bodyParser());
-app.use(express.cookieParser());
+app.use(express.cookieParser('interaction_parser'));
 app.use(express.session({
-  secret: 'yoursecret' /* TODO: Remember to change to your own secret */
+  cookie: {
+    maxAge: 6000000000
+  }
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);

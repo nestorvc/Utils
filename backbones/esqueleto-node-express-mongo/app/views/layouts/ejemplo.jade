@@ -1,0 +1,23 @@
+doctype html
+html
+  include ../includes/head
+  body
+
+    div#masthead.navbar.navbar-inverse
+      div.container
+      
+    div
+      div.container
+        if errors && errors.length > 0
+          div.alert.alert-danger
+            button.close(type="button", data-dismiss="alert") &times;
+            = errors
+
+        if messages && messages.length > 0
+          div.alert.alert-success
+            button.close(type="button", data-dismiss="alert") &times;
+            = messages
+      div#mainView
+      
+
+    include ../includes/foot

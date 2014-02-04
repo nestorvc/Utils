@@ -1,0 +1,25 @@
+{
+    "name": "enertiva-fb-tab-cotizador",
+    "description": "Enertiva - FB Tab Cotizador",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "latest",
+        "jade": "latest",
+        "async": "latest",
+        "underscore": "latest"
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    },
+    "author": {
+        "name": "Nestor Villalobos",
+        "email": "nestor@interaction.cr"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-compass": "~0.5.0",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "grunt-contrib-watch": "~0.5.3"
+    }
+}

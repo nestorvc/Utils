@@ -1,23 +1,21 @@
 {
-    "name": "node-express-mongo-template",
-    "description": "Node-Express-Mongo Template",
+    "name": "express-mongo-nitram-skeleton",
+    "description": "Express-Mongo-Nitram Skeleton",
     "version": "0.0.1",
     "dependencies": {
         "express": "latest",
+        "express-namespace": "latest",
         "mongoose": "latest",
         "mongoose-user": "latest",
         "connect-mongo": "latest",
         "connect-flash": "latest",
         "passport": "latest",
-        "passport-google": "latest",
         "passport-local": "latest",
-        "passport-facebook": "latest",
-        "passport-twitter": "latest",
         "jade": "latest",
         "async": "latest",
         "underscore": "latest",
         "moment": "latest",
-        "cloudinary": "latest"
+        "view-helpers": "latest",
     },
     "engines": {
         "node": "0.10.x",

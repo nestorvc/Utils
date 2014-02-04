@@ -1,0 +1,18 @@
+doctype 5
+html
+  include ../includes/headMain
+  body    
+    //- if lt IE 7
+      p.browsehappy Actualmente está utilizando un navegador 
+        strong desactualizado. 
+        | Por favor
+        a(href="http://browsehappy.com/") actualice su navegador 
+        | para mejorar su experiencia.
+
+    div.container.text-center
+      div.container#logo
+        img(src="img/logo.png")
+    div.container
+      block content
+      
+      include ../includes/footMain

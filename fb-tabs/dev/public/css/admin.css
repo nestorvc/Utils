@@ -1,0 +1,21 @@
+/* ===================
+   Content
+   =================== */
+/*
+ * CONTENTS...................You’re reading it!
+ * COMPASS....................Imports, requires, etc.
+ * SECTIONS...................Content from custom sections
+ */
+/* ===================
+   Compass
+   =================== */
+/* ===================
+   Sections
+   =================== */
+/* ===================
+   Helpers
+   =================== */
+/* line 35, sass/admin.scss */
+.padding-top-80 {
+  padding-top: 80px;
+}

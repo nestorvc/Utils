@@ -1,0 +1,81 @@
+extends ../layouts/admin
+
+block content
+  ul.list-inline
+    li: h2 Cotizaciones
+    li.pull-right: button.btn.btn-primary Descargar datos
+
+  table.table.table-hover.table-condensed
+    thead
+      tr
+        th ID
+        th Nombre
+        th Correo
+        th Teléfono
+        th Lugar
+        th Personas
+        th Sistema
+        th Empresa
+        th Consumo
+        th Financiamiento
+        th Detalle
+        th Monto
+    tbody
+      - for (var i = 0; i < 10; i++ )
+        tr
+          td FOT-13#{i}
+          td Néstor Villalobos
+          td nestor@interaction.cr
+          td 85227451
+          td Los Yoses
+          td 5
+          td Fotovoltáico
+          td CNFL
+          td 1.000 kWh
+          td: a(data-toggle="modal", href="#detalleFinanciamientoModal")
+            span: i.fa.fa-check 
+            | &nbsp; Ver detalles
+          td: a(data-toggle="modal", href="#detalleModal") 
+            span: i.fa.fa-list-ul
+            | &nbsp; Ver
+          td $7.200
+
+  div#detalleModal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+          h2.modal-title Detalle de la Cotización
+        div.modal-body
+          table.table.table-hover.table-condensed
+            thead
+              tr
+                th Generación 
+                th Ahorro 
+                th Módulos
+                th Área de techo
+            tbody
+              tr
+                td XXXXX kWh
+                td 35% mensuales
+                td 4 módulos primarios
+                td 15m2
+
+  div#detalleFinanciamientoModal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+          h2.modal-title Detalle del Financiamiento
+        div.modal-body
+          table.table.table-hover.table-condensed
+            thead
+              tr
+                th Tipo
+                th Moneda
+                th Años
+            tbody
+              tr
+                td Prendario
+                td Dólares
+                td 5 años

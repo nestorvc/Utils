@@ -1,50 +1,50 @@
 define(['jquery', 'nitram'], function($, nitram) {
-	'use strict';
+  'use strict';
 
-	// ----------------------
-	// Routes
-	// ----------------------
+  // ----------------------
+  // Routes
+  // ----------------------
 
-	nitram.routes = {
-		'/': {
-			controller: 'ejemploController',
-			title: 'Ejemplo',
-			req: true
-		}
-	};
+  nitram.routes = {
+    '/': {
+      controller: 'ejemploController',
+      title: 'Ejemplo',
+      req: true
+    }
+  };
 
-	// ----------------------
-	// Controllers
-	// ----------------------
+  // ----------------------
+  // Controllers
+  // ----------------------
 
-	nitram.ejemploController = function(route, data) {
-		// compile to intercept new links
-		this.compile($('#mainView').html(data));
-	}
+  nitram.ejemploController = function(route, data) {
+    // compile to intercept new links
+    this.compile($('#mainView').html(data));
+  }
 
-	// ----------------------
-	// Utils
-	// ----------------------
+  // ----------------------
+  // Utils
+  // ----------------------
 
-	/**
-	 * Renders the app
-	 * - res <Object> express response
-	 * returns: <undefined>
-	 */
+  /**
+   * Renders the app
+   * - res <Object> express response
+   * returns: <undefined>
+   */
 
 
-	// ----------------------
-	// Init
-	// ----------------------
+  // ----------------------
+  // Init
+  // ----------------------
 
-	var app = {
-		nitram: nitram,
-		init: function() {
-			nitram.init();
-			nitram.compile($('#masthead'));
-		}
-	};
+  var app = {
+    nitram: nitram,
+    init: function() {
+      nitram.init();
+      nitram.compile($('#masthead'));
+    }
+  };
 
-	return app;
+  return app;
 
 });
